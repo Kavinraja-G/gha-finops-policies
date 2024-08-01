@@ -8068,11 +8068,13 @@ const core = __nccwpck_require__(2186)
 const exec = __nccwpck_require__(1514)
 const fs = __nccwpck_require__(7147)
 const yaml = __nccwpck_require__(1917)
+const path = __nccwpck_require__(1017)
 
 async function run() {
   try {
     const configStr = core.getInput('config')
     const tfPlanOutputPath = core.getInput('tfPlanOutputPath')
+    const policyPath = path.join(__dirname, 'policy')
 
     const config = yaml.load(configStr)
 
@@ -8103,7 +8105,7 @@ async function run() {
         '-d',
         outputPath,
         '--policy',
-        'policy/'
+        policyPath
       ])
     } catch (error) {
       core.setFailed(`Conftest failed: ${error.message}`)

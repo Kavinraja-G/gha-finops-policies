@@ -2,11 +2,13 @@ const core = require('@actions/core')
 const exec = require('@actions/exec')
 const fs = require('fs')
 const yaml = require('js-yaml')
+const path = require('path')
 
 async function run() {
   try {
     const configStr = core.getInput('config')
     const tfPlanOutputPath = core.getInput('tfPlanOutputPath')
+    const policyPath = path.join(__dirname, 'policy')
 
     const config = yaml.load(configStr)
 
@@ -37,7 +39,7 @@ async function run() {
         '-d',
         outputPath,
         '--policy',
-        'policy/'
+        policyPath
       ])
     } catch (error) {
       core.setFailed(`Conftest failed: ${error.message}`)
