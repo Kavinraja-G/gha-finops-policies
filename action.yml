@@ -3,6 +3,9 @@ description: 'GitHub Action for FinOps policies using OPA'
 author: 'Kavinraja-G'
 
 inputs:
+  tfPlanOutputPath:
+    description: 'Terraform Plan output JSON file path'
+    required: true
   config:
     description: 'YAML-like configuration string'
     required: true

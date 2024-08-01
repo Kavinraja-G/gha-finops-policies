@@ -29,11 +29,13 @@ jobs:
         run: |
           wget -O - 'https://github.com/open-policy-agent/conftest/releases/download/v${{ env.CONFTEST_VERSION }}/conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz' | tar zxvf -
           ./conftest --version
+          mv ./conftest /usr/local/bin/
 
       - name: Test Local Action
         id: test-action
         uses: ./
         with:
+          tfPlanOutputPath: ${{ env.WORKING_DIR }}test-tfplan.json
           config: |
             ec2:
               enabled: false
@@ -48,9 +50,3 @@ jobs:
       - name: Print Generated Config
         id: output
         run: cat "${{ steps.test-action.outputs.out-file }}"
-
-      - name: Run Conftest
-        id: conftest
-        run:
-          ./conftest test ${{ env.WORKING_DIR }}test-tfplan.json -d ${{
-          steps.test-action.outputs.out-file }}
