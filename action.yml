@@ -1,18 +1,15 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'gha-finops-policies'
+description: 'GitHub Action for FinOps policies using OPA'
+author: 'Kavinraja-G'
 
-# Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  config:
+    description: 'YAML-like configuration string'
     required: true
-    default: '1000'
 
-# Define your outputs here.
 outputs:
-  time:
-    description: 'Your output description here'
+  out-file:
+    description: 'Path to the generated YAML file'
 
 runs:
   using: node20

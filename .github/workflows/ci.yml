@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: CI
 
 on:
   pull_request:
@@ -11,39 +11,11 @@ on:
 permissions:
   contents: read
 
+env:
+  CONFTEST_VERSION: 0.49.1
+  WORKING_DIR: ./
+
 jobs:
-  test-javascript:
-    name: JavaScript Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: npm
-
-      - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
-
-      - name: Check Format
-        id: npm-format-check
-        run: npm run format:check
-
-      - name: Lint
-        id: npm-lint
-        run: npm run lint
-
-      - name: Test
-        id: npm-ci-test
-        run: npm run ci-test
-
   test-action:
     name: GitHub Actions Test
     runs-on: ubuntu-latest
@@ -53,12 +25,32 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Install Conftest
+        run: |
+          wget -O - 'https://github.com/open-policy-agent/conftest/releases/download/v${{ env.CONFTEST_VERSION }}/conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz' | tar zxvf -
+          ./conftest --version
+
       - name: Test Local Action
         id: test-action
         uses: ./
         with:
-          milliseconds: 1000
+          config: |
+            ec2:
+              enabled: false
+              allowedInstanceTypeRegEx: "large|metal"
+            tags:
+              enabled: true
+              allowedBillingTags:
+                - "ApplicationOwner"
+                - "FinancialOwner"
+                - "createdBy"
 
-      - name: Print Output
+      - name: Print Generated Config
         id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+        run: cat "${{ steps.test-action.outputs.out-file }}"
+
+      - name: Run Conftest
+        id: conftest
+        run:
+          ./conftest test ${{ env.WORKING_DIR }}test-tfplan.json -d ${{
+          steps.test-action.outputs.out-file }}

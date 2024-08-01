@@ -1,0 +1,536 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.3",
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "random_uuid.random_id",
+          "mode": "managed",
+          "type": "random_uuid",
+          "name": "random_id",
+          "provider_name": "registry.terraform.io/hashicorp/random",
+          "schema_version": 0,
+          "values": { "keepers": null },
+          "sensitive_values": {}
+        }
+      ],
+      "child_modules": [
+        {
+          "resources": [
+            {
+              "address": "module.webapp.aws_instance.web_app",
+              "mode": "managed",
+              "type": "aws_instance",
+              "name": "web_app",
+              "provider_name": "registry.terraform.io/hashicorp/aws",
+              "schema_version": 1,
+              "values": {
+                "ami": "ami-674cbc1e",
+                "credit_specification": [],
+                "ebs_block_device": [
+                  {
+                    "delete_on_termination": true,
+                    "device_name": "my_data",
+                    "iops": 600,
+                    "tags": null,
+                    "volume_size": 250,
+                    "volume_type": "io1"
+                  }
+                ],
+                "get_password_data": false,
+                "hibernation": null,
+                "instance_type": "t3.large",
+                "launch_template": [],
+                "root_block_device": [
+                  {
+                    "delete_on_termination": true,
+                    "tags": null,
+                    "volume_size": 100
+                  }
+                ],
+                "source_dest_check": true,
+                "tags": {
+                  "FinancialOwner": "Kavin",
+                  "createdBy": "Terraform",
+                  "env": "sandbox"
+                },
+                "tags_all": {
+                  "FinancialOwner": "Kavin",
+                  "createdBy": "Terraform",
+                  "env": "sandbox"
+                },
+                "timeouts": null,
+                "user_data_replace_on_change": false,
+                "volume_tags": null
+              },
+              "sensitive_values": {
+                "capacity_reservation_specification": [],
+                "cpu_options": [],
+                "credit_specification": [],
+                "ebs_block_device": [{}],
+                "enclave_options": [],
+                "ephemeral_block_device": [],
+                "instance_market_options": [],
+                "ipv6_addresses": [],
+                "launch_template": [],
+                "maintenance_options": [],
+                "metadata_options": [],
+                "network_interface": [],
+                "private_dns_name_options": [],
+                "root_block_device": [{}],
+                "secondary_private_ips": [],
+                "security_groups": [],
+                "tags": {},
+                "tags_all": {},
+                "vpc_security_group_ids": []
+              }
+            },
+            {
+              "address": "module.webapp.aws_lambda_function.hello_world",
+              "mode": "managed",
+              "type": "aws_lambda_function",
+              "name": "hello_world",
+              "provider_name": "registry.terraform.io/hashicorp/aws",
+              "schema_version": 0,
+              "values": {
+                "code_signing_config_arn": null,
+                "dead_letter_config": [],
+                "description": null,
+                "environment": [],
+                "file_system_config": [],
+                "filename": "function.zip",
+                "function_name": "hello_world",
+                "handler": "exports.test",
+                "image_config": [],
+                "image_uri": null,
+                "kms_key_arn": null,
+                "layers": null,
+                "memory_size": 128,
+                "package_type": "Zip",
+                "publish": false,
+                "replace_security_groups_on_destroy": null,
+                "replacement_security_group_ids": null,
+                "reserved_concurrent_executions": -1,
+                "role": "arn:aws:lambda:us-east-1:123456789101:resource-id",
+                "runtime": "nodejs12.x",
+                "s3_bucket": null,
+                "s3_key": null,
+                "s3_object_version": null,
+                "skip_destroy": false,
+                "snap_start": [],
+                "tags": {
+                  "FinancialOwner": "Kavin",
+                  "createdBy": "Terraform",
+                  "env": "sandbox"
+                },
+                "tags_all": {
+                  "FinancialOwner": "Kavin",
+                  "createdBy": "Terraform",
+                  "env": "sandbox"
+                },
+                "timeout": 3,
+                "timeouts": null,
+                "vpc_config": []
+              },
+              "sensitive_values": {
+                "architectures": [],
+                "dead_letter_config": [],
+                "environment": [],
+                "ephemeral_storage": [],
+                "file_system_config": [],
+                "image_config": [],
+                "logging_config": [],
+                "snap_start": [],
+                "tags": {},
+                "tags_all": {},
+                "tracing_config": [],
+                "vpc_config": []
+              }
+            }
+          ],
+          "address": "module.webapp"
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "random_uuid.random_id",
+      "mode": "managed",
+      "type": "random_uuid",
+      "name": "random_id",
+      "provider_name": "registry.terraform.io/hashicorp/random",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": { "keepers": null },
+        "after_unknown": { "id": true, "result": true },
+        "before_sensitive": false,
+        "after_sensitive": {}
+      }
+    },
+    {
+      "address": "module.webapp.aws_instance.web_app",
+      "module_address": "module.webapp",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "web_app",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "ami": "ami-674cbc1e",
+          "credit_specification": [],
+          "ebs_block_device": [
+            {
+              "delete_on_termination": true,
+              "device_name": "my_data",
+              "iops": 600,
+              "tags": null,
+              "volume_size": 250,
+              "volume_type": "io1"
+            }
+          ],
+          "get_password_data": false,
+          "hibernation": null,
+          "instance_type": "t3.large",
+          "launch_template": [],
+          "root_block_device": [
+            { "delete_on_termination": true, "tags": null, "volume_size": 100 }
+          ],
+          "source_dest_check": true,
+          "tags": {
+            "FinancialOwner": "Kavin",
+            "createdBy": "Terraform",
+            "env": "sandbox"
+          },
+          "tags_all": {
+            "FinancialOwner": "Kavin",
+            "createdBy": "Terraform",
+            "env": "sandbox"
+          },
+          "timeouts": null,
+          "user_data_replace_on_change": false,
+          "volume_tags": null
+        },
+        "after_unknown": {
+          "arn": true,
+          "associate_public_ip_address": true,
+          "availability_zone": true,
+          "capacity_reservation_specification": true,
+          "cpu_core_count": true,
+          "cpu_options": true,
+          "cpu_threads_per_core": true,
+          "credit_specification": [],
+          "disable_api_stop": true,
+          "disable_api_termination": true,
+          "ebs_block_device": [
+            {
+              "encrypted": true,
+              "kms_key_id": true,
+              "snapshot_id": true,
+              "throughput": true,
+              "volume_id": true
+            }
+          ],
+          "ebs_optimized": true,
+          "enclave_options": true,
+          "ephemeral_block_device": true,
+          "host_id": true,
+          "host_resource_group_arn": true,
+          "iam_instance_profile": true,
+          "id": true,
+          "instance_initiated_shutdown_behavior": true,
+          "instance_lifecycle": true,
+          "instance_market_options": true,
+          "instance_state": true,
+          "ipv6_address_count": true,
+          "ipv6_addresses": true,
+          "key_name": true,
+          "launch_template": [],
+          "maintenance_options": true,
+          "metadata_options": true,
+          "monitoring": true,
+          "network_interface": true,
+          "outpost_arn": true,
+          "password_data": true,
+          "placement_group": true,
+          "placement_partition_number": true,
+          "primary_network_interface_id": true,
+          "private_dns": true,
+          "private_dns_name_options": true,
+          "private_ip": true,
+          "public_dns": true,
+          "public_ip": true,
+          "root_block_device": [
+            {
+              "device_name": true,
+              "encrypted": true,
+              "iops": true,
+              "kms_key_id": true,
+              "throughput": true,
+              "volume_id": true,
+              "volume_type": true
+            }
+          ],
+          "secondary_private_ips": true,
+          "security_groups": true,
+          "spot_instance_request_id": true,
+          "subnet_id": true,
+          "tags": {},
+          "tags_all": {},
+          "tenancy": true,
+          "user_data": true,
+          "user_data_base64": true,
+          "vpc_security_group_ids": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {
+          "capacity_reservation_specification": [],
+          "cpu_options": [],
+          "credit_specification": [],
+          "ebs_block_device": [{}],
+          "enclave_options": [],
+          "ephemeral_block_device": [],
+          "instance_market_options": [],
+          "ipv6_addresses": [],
+          "launch_template": [],
+          "maintenance_options": [],
+          "metadata_options": [],
+          "network_interface": [],
+          "private_dns_name_options": [],
+          "root_block_device": [{}],
+          "secondary_private_ips": [],
+          "security_groups": [],
+          "tags": {},
+          "tags_all": {},
+          "vpc_security_group_ids": []
+        }
+      }
+    },
+    {
+      "address": "module.webapp.aws_lambda_function.hello_world",
+      "module_address": "module.webapp",
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "hello_world",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "code_signing_config_arn": null,
+          "dead_letter_config": [],
+          "description": null,
+          "environment": [],
+          "file_system_config": [],
+          "filename": "function.zip",
+          "function_name": "hello_world",
+          "handler": "exports.test",
+          "image_config": [],
+          "image_uri": null,
+          "kms_key_arn": null,
+          "layers": null,
+          "memory_size": 128,
+          "package_type": "Zip",
+          "publish": false,
+          "replace_security_groups_on_destroy": null,
+          "replacement_security_group_ids": null,
+          "reserved_concurrent_executions": -1,
+          "role": "arn:aws:lambda:us-east-1:123456789101:resource-id",
+          "runtime": "nodejs12.x",
+          "s3_bucket": null,
+          "s3_key": null,
+          "s3_object_version": null,
+          "skip_destroy": false,
+          "snap_start": [],
+          "tags": {
+            "FinancialOwner": "Kavin",
+            "createdBy": "Terraform",
+            "env": "sandbox"
+          },
+          "tags_all": {
+            "FinancialOwner": "Kavin",
+            "createdBy": "Terraform",
+            "env": "sandbox"
+          },
+          "timeout": 3,
+          "timeouts": null,
+          "vpc_config": []
+        },
+        "after_unknown": {
+          "architectures": true,
+          "arn": true,
+          "dead_letter_config": [],
+          "environment": [],
+          "ephemeral_storage": true,
+          "file_system_config": [],
+          "id": true,
+          "image_config": [],
+          "invoke_arn": true,
+          "last_modified": true,
+          "logging_config": true,
+          "qualified_arn": true,
+          "qualified_invoke_arn": true,
+          "signing_job_arn": true,
+          "signing_profile_version_arn": true,
+          "snap_start": [],
+          "source_code_hash": true,
+          "source_code_size": true,
+          "tags": {},
+          "tags_all": {},
+          "tracing_config": true,
+          "version": true,
+          "vpc_config": []
+        },
+        "before_sensitive": false,
+        "after_sensitive": {
+          "architectures": [],
+          "dead_letter_config": [],
+          "environment": [],
+          "ephemeral_storage": [],
+          "file_system_config": [],
+          "image_config": [],
+          "logging_config": [],
+          "snap_start": [],
+          "tags": {},
+          "tags_all": {},
+          "tracing_config": [],
+          "vpc_config": []
+        }
+      }
+    }
+  ],
+  "configuration": {
+    "provider_config": {
+      "aws": {
+        "name": "aws",
+        "full_name": "registry.terraform.io/hashicorp/aws",
+        "expressions": {
+          "access_key": { "constant_value": "mock_access_key" },
+          "region": { "constant_value": "us-east-1" },
+          "secret_key": { "constant_value": "mock_secret_key" },
+          "skip_credentials_validation": { "constant_value": true },
+          "skip_requesting_account_id": { "constant_value": true }
+        }
+      },
+      "random": {
+        "name": "random",
+        "full_name": "registry.terraform.io/hashicorp/random"
+      }
+    },
+    "root_module": {
+      "resources": [
+        {
+          "address": "random_uuid.random_id",
+          "mode": "managed",
+          "type": "random_uuid",
+          "name": "random_id",
+          "provider_config_key": "random",
+          "schema_version": 0
+        }
+      ],
+      "module_calls": {
+        "webapp": {
+          "source": "./modules/web-app",
+          "expressions": {
+            "block_device_iops": { "constant_value": 600 },
+            "block_device_volume_size": { "constant_value": 250 },
+            "hello_world_function_memory_size": { "constant_value": 128 },
+            "instance_type": { "constant_value": "t3.large" },
+            "root_block_device_volume_size": { "constant_value": 100 },
+            "tags": {
+              "constant_value": {
+                "FinancialOwner": "Kavin",
+                "createdBy": "Terraform",
+                "env": "sandbox"
+              }
+            }
+          },
+          "module": {
+            "resources": [
+              {
+                "address": "aws_instance.web_app",
+                "mode": "managed",
+                "type": "aws_instance",
+                "name": "web_app",
+                "provider_config_key": "aws",
+                "expressions": {
+                  "ami": { "constant_value": "ami-674cbc1e" },
+                  "ebs_block_device": [
+                    {
+                      "device_name": { "constant_value": "my_data" },
+                      "iops": { "references": ["var.block_device_iops"] },
+                      "volume_size": {
+                        "references": ["var.block_device_volume_size"]
+                      },
+                      "volume_type": { "constant_value": "io1" }
+                    }
+                  ],
+                  "instance_type": { "references": ["var.instance_type"] },
+                  "root_block_device": [
+                    {
+                      "volume_size": {
+                        "references": ["var.root_block_device_volume_size"]
+                      }
+                    }
+                  ],
+                  "tags": { "references": ["var.tags"] }
+                },
+                "schema_version": 1
+              },
+              {
+                "address": "aws_lambda_function.hello_world",
+                "mode": "managed",
+                "type": "aws_lambda_function",
+                "name": "hello_world",
+                "provider_config_key": "aws",
+                "expressions": {
+                  "filename": { "constant_value": "function.zip" },
+                  "function_name": { "constant_value": "hello_world" },
+                  "handler": { "constant_value": "exports.test" },
+                  "memory_size": {
+                    "references": ["var.hello_world_function_memory_size"]
+                  },
+                  "role": {
+                    "constant_value": "arn:aws:lambda:us-east-1:123456789101:resource-id"
+                  },
+                  "runtime": { "constant_value": "nodejs12.x" },
+                  "tags": { "references": ["var.tags"] }
+                },
+                "schema_version": 0
+              }
+            ],
+            "variables": {
+              "block_device_iops": {
+                "description": "The number of IOPS for the block device for the web app EC2 instance"
+              },
+              "block_device_volume_size": {
+                "description": "The size of the block device volume for the web app EC2 instance"
+              },
+              "hello_world_function_memory_size": {
+                "description": "The memory to allocate to the hello world Lambda function"
+              },
+              "instance_type": {
+                "description": "The EC2 instance type for the web app"
+              },
+              "root_block_device_volume_size": {
+                "description": "The size of the root block device volume for the web app EC2 instance"
+              },
+              "tags": {
+                "default": {},
+                "description": "Tags for resources created by Terraform"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "timestamp": "2024-07-31T18:30:41Z",
+  "applyable": true,
+  "complete": true,
+  "errored": false
+}
