@@ -1,6 +1,6 @@
 package cost_tags
 
-import data.tags
+import data.config.tags
 
 cost_allocation_tags = {type | type := tags.allowedBillingTags[_]}
 
