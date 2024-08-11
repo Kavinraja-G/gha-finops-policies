@@ -39,7 +39,7 @@ jobs:
           config: |
             ec2:
               enabled: false
-              allowedInstanceTypeRegEx: "large|metal"
+              restrictedInstanceTypeRegEx: "large|metal"
             tags:
               enabled: true
               allowedBillingTags:

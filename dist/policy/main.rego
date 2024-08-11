@@ -4,7 +4,7 @@ import data.cost_tags
 import data.config.ec2
 import data.config.tags
 
-allowed_instance_type_regex := ec2.allowedInstanceTypeRegEx
+allowed_instance_type_regex := ec2.restrictedInstanceTypeRegEx
 enable_tag_checks := tags.enabled
 enable_ec2_checks := ec2.enabled
 
