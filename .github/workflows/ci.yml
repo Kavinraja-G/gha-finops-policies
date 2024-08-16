@@ -35,7 +35,7 @@ jobs:
         id: test-action-aws
         uses: ./
         with:
-          tfPlanOutputPath: ${{ env.WORKING_DIR }}test-tfplan.json
+          inputPath: ${{ env.WORKING_DIR }}test-tfplan.json
           config: |
             kubernetes:
               enabled: false
@@ -54,7 +54,7 @@ jobs:
         id: test-action-k8s
         uses: ./
         with:
-          tfPlanOutputPath: ${{ env.WORKING_DIR }}test-deployment.yaml
+          inputPath: ${{ env.WORKING_DIR }}test-deployment.yaml
           config: |
             kubernetes:
               enabled: true

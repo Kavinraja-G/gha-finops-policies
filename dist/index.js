@@ -8073,7 +8073,7 @@ const path = __nccwpck_require__(1017)
 async function run() {
   try {
     const configStr = core.getInput('config')
-    const inputPath = core.getInput('tfPlanOutputPath')
+    const inputPath = core.getInput('inputPath')
     let policyPath = path.join(__dirname, 'aws-policies')
     let outputPath = 'config.yaml'
 
