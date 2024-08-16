@@ -7,27 +7,42 @@ const path = require('path')
 async function run() {
   try {
     const configStr = core.getInput('config')
-    const tfPlanOutputPath = core.getInput('tfPlanOutputPath')
-    const policyPath = path.join(__dirname, 'policy')
+    const inputPath = core.getInput('tfPlanOutputPath')
+    let policyPath = path.join(__dirname, 'aws-policies')
+    let outputPath = 'config.yaml'
 
     const config = yaml.load(configStr)
 
     // Write config.yaml for OPA Inputs
-    const opaInputContent = yaml.dump({
-      config: {
+    const opaInputContent = {
+      config: {}
+    }
+
+    // AWS policies config
+    if (config.aws && config.aws.enabled) {
+      opaInputContent.config.aws = {
+        enabled: config.aws.enabled,
         ec2: {
-          enabled: config.ec2.enabled,
-          allowedInstanceTypeRegEx: config.ec2.allowedInstanceTypeRegEx
+          enabled: config.aws.ec2.enabled,
+          allowedInstanceTypeRegEx: config.aws.ec2.allowedInstanceTypeRegEx
         },
         tags: {
-          enabled: config.tags.enabled,
-          allowedBillingTags: config.tags.allowedBillingTags
+          enabled: config.aws.tags.enabled,
+          allowedBillingTags: config.aws.tags.allowedBillingTags
         }
       }
-    })
+    }
 
-    const outputPath = 'config.yaml'
-    fs.writeFileSync(outputPath, opaInputContent, 'utf8')
+    // Kubernetes policies config
+    if (config.kubernetes && config.kubernetes.enabled) {
+      policyPath = path.join(__dirname, 'k8s-policies')
+      outputPath = 'k8s-config.yaml'
+      opaInputContent.config.kubernetes = {
+        enabled: config.kubernetes.enabled
+      }
+    }
+
+    fs.writeFileSync(outputPath, yaml.dump(opaInputContent), 'utf8')
 
     core.setOutput('out-file', outputPath)
 
@@ -35,7 +50,7 @@ async function run() {
     try {
       await exec.exec('conftest', [
         'test',
-        tfPlanOutputPath,
+        inputPath,
         '-d',
         outputPath,
         '--policy',

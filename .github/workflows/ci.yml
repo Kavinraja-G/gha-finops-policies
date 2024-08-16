@@ -31,21 +31,38 @@ jobs:
           ./conftest --version
           mv ./conftest /usr/local/bin/
 
-      - name: Test Local Action
-        id: test-action
+      - name: Test Local Action - for AWS
+        id: test-action-aws
         uses: ./
         with:
           tfPlanOutputPath: ${{ env.WORKING_DIR }}test-tfplan.json
           config: |
-            ec2:
+            kubernetes:
               enabled: false
-              restrictedInstanceTypeRegEx: "large|metal"
-            tags:
+            aws:
               enabled: true
-              allowedBillingTags:
-                - "FinancialOwner"
-                - "createdBy"
+              ec2:
+                enabled: false
+                restrictedInstanceTypeRegEx: "large|metal"
+              tags:
+                enabled: true
+                allowedBillingTags:
+                  - "FinancialOwner"
+                  - "createdBy"
+
+      - name: Test Local Action - for K8s
+        id: test-action-k8s
+        uses: ./
+        with:
+          tfPlanOutputPath: ${{ env.WORKING_DIR }}test-deployment.yaml
+          config: |
+            kubernetes:
+              enabled: true
+            aws:
+              enabled: false
 
       - name: Print Generated Config
         id: output
-        run: cat "${{ steps.test-action.outputs.out-file }}"
+        run: |
+          cat "${{ steps.test-action-aws.outputs.out-file }}"
+          cat "${{ steps.test-action-k8s.outputs.out-file }}"
